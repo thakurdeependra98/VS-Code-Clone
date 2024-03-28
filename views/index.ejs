@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div id="main">
+    <div id="overlay">
+      <form    id="renameForm" action="/rename/<%= files.name %>">
+        <input  id="renameinput" name="rename"  type="text" placeholder="rename file">
+        <input id="renamesubmit" type="submit" value="update" >
+      </form>
+    </div>
+    <div id="left">
+<div id="folder">
+  <h1><%=folder%></h1>
+  <div id="icons1">
+<i  id="fileinput"  class="ri-file-line">   </i>
+<i  id="folderinput"  class="ri-folder-line"></i>
+<a href="/bringback"> <i  id="refresh"  class="ri-restart-line"></i></a>
+
+  </div>
+</div>
+<form  id="formfileinput"  action="/createfile">
+  <input type="text" name="file" id="filecreate"  placeholder="file">
+</form>
+<form  id="formfolderinput" action="/createfolder">
+  <input type="text" name="folder" id="foldercreate"  placeholder="folder">
+</form>
+<div class="files">
+  <% files.forEach(function(file){ %>
+    <div class="file">
+      <div class="filename">
+        <% if(file.isDirectory()){ %>
+          <i class="ri-folder-line"></i>
+      <%  }else{ %>
+        <i class="ri-file-line"></i>
+        <% } %>
+     
+        <a href="/file/<%=file.name%>">
+          <%= file.name %>
+        </a>
+      </div>
+   
+    <div id="icons2">
+     <i data-renamefile="<%=file.name%>"  id="editbtn" class="ri-edit-line"></i>
+    <% if(file.isDirectory()){ %>
+      <a href="/delete/folder/<%=file.name%>"><i class="ri-delete-bin-line"></i></a>
+      <%  }else{ %>
+        <a href="/delete/file/<%=file.name%>"><i class="ri-delete-bin-line"></i></a>
+
+        <% } %>
+  
+
+    
+    </div>
+  </div>
+    <% })%>
+
+
+  
+</div>
+
+
+    </div>
+    <div id="right">
+      
+       </div>
+   </div> 
+
+  <script src="/javascripts/script.js"></script>
+</body>
+</html>
